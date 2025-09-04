@@ -4,8 +4,11 @@ server:
 spring:
   config:
     import: optional:file:.env[.properties]
+
   application:
     name: support-service
+  messages:
+    encoding: utf-8
 
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -18,10 +21,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
+        jdbc:
+          batch_versioned_data: true
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
@@ -35,34 +40,5 @@ logging:
   level:
     root: INFO
     org.springframework: DEBUG
-
-security:
-  token: ${SECURITY_TOKEN}
-  expiration: 3600000
-
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-
-
-springdoc:
-  api-docs:
-    enabled: true
-
-  swagger-ui:
-    docExpansion: full
-    defaultModelsExpandDepth: 1
-    defaultModelExpandDepth: 3
-    defaultModelRendering: schema
-    operationsSorter: method
-    tagsSorter: alpha
-
-  model-converters:
-    pageable-converter:
-      enabled: true
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
