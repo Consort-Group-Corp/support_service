@@ -12,9 +12,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db:5432/consort_group
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:consort-postgres}:${DB_PORT:5432}/${POSTGRES_DB:consort_group}}
+    username: ${DB_USERNAME:${POSTGRES_USER:consort}}
+    password: ${DB_PASSWORD:${POSTGRES_PASSWORD:}}
     hikari:
       maximum-pool-size: 10
 
@@ -23,18 +23,24 @@ spring:
       ddl-auto: update
     show-sql: false
     properties:
-      hibernate:
-        format_sql: true
-        jdbc:
-          batch_versioned_data: true
+      hibernate.format_sql: true
+      hibernate.jdbc.batch_versioned_data: true
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
   data:
     redis:
-      host: consort-redis-support-service
-      port: 6379
+      host: ${REDIS_SUPPORT_HOST:consort-redis-support-service}
+      port: ${REDIS_SUPPORT_PORT:6379}
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+        shutdown-timeout: 100ms
 
 logging:
   level:
@@ -42,3 +48,19 @@ logging:
     org.springframework: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE:http://consort-eureka-service:8762/eureka/}
+  instance:
+    prefer-ip-address: true
+    instance-id: ${HOSTNAME}:${server.port}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

@@ -50,6 +50,7 @@ dependencies {
 
     // MapStruct
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
 
     // JWT
@@ -69,6 +70,9 @@ dependencies {
     //Jakarta
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
     implementation("org.hibernate.validator:hibernate-validator:8.0.1.Final")
+
+    //Actuator
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
