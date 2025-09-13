@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changeset/V043_create_support_schema.sql
+  - include:
+      file: db/changelog/changeset/V044_create_support_issue_presets_table.sql
+  - include:
+      file: db/changelog/changeset/V045_create_support_ticket_table.sql

@@ -36,6 +36,35 @@ spring:
       host: localhost
       port: 6387
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+security:
+  token: ${SECURITY_TOKEN}
+  expiration: 3600000
+
+springdoc:
+  api-docs:
+    enabled: true
+
+  swagger-ui:
+    docExpansion: full
+    defaultModelsExpandDepth: 1
+    defaultModelExpandDepth: 3
+    defaultModelRendering: schema
+    operationsSorter: method
+    tagsSorter: alpha
+
+  model-converters:
+    pageable-converter:
+      enabled: true
+
 logging:
   level:
     root: INFO
