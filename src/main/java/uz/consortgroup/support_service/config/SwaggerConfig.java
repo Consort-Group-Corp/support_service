@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 .servers(List.of(new Server().url("/")))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .info(new Info()
-                        .title("Webinar Service API")
+                        .title("Support Service API")
                         .description("API документация для Support Service")
                         .version("v1.0")
                         .license(new License().name("Apache 2.0").url("https://springdoc.org")))
