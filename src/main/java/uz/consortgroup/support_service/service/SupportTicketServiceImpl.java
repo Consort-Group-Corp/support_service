@@ -49,7 +49,6 @@ public class SupportTicketServiceImpl implements SupportTicketService {
             ticket.setIssueType(SupportIssueType.PRESET);
             ticket.setSelectedIssue(preset);
 
-            // сохраняем пояснение, если прислали
             String note = supportTicketValidator.normalizeOptionalComment(dto.getComment());
             ticket.setComment(note);
 
@@ -71,5 +70,4 @@ public class SupportTicketServiceImpl implements SupportTicketService {
                 .message("Заявка отправлена")
                 .build();
     }
-
 }

@@ -1,12 +1,14 @@
 package uz.consortgroup.support_service.handler;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import uz.consortgroup.support_service.exception.PresetNotFoundExecption;
 import uz.consortgroup.support_service.exception.TicketNotFoundException;
 import uz.consortgroup.support_service.exception.UnauthorizedException;
@@ -17,6 +19,22 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler({ MethodArgumentTypeMismatchException.class, ConversionFailedException.class })
+    public ResponseEntity<ErrorResponse> handleTypeMismatch(Exception ex) {
+        String msg = "Invalid request parameter";
+        if (ex instanceof MethodArgumentTypeMismatchException e) {
+            msg = "Invalid value for '" + e.getName() + "': " + e.getValue();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Bad request", msg));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Bad request", ex.getMessage()));
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
