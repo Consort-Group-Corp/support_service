@@ -11,7 +11,6 @@ import uz.consortgroup.core.api.v1.dto.support.response.IssuePresetResponse;
 import uz.consortgroup.core.api.v1.dto.user.enumeration.UserRole;
 import uz.consortgroup.support_service.entity.SupportIssuePreset;
 import uz.consortgroup.support_service.repository.SupportIssuePresetRepository;
-import uz.consortgroup.support_service.security.AuthContext;
 
 import java.util.List;
 import java.util.Optional;

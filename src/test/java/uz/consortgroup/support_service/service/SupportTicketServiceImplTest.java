@@ -17,7 +17,6 @@ import uz.consortgroup.core.api.v1.dto.user.enumeration.UserRole;
 import uz.consortgroup.support_service.entity.SupportIssuePreset;
 import uz.consortgroup.support_service.entity.SupportTicket;
 import uz.consortgroup.support_service.repository.SupportTicketRepository;
-import uz.consortgroup.support_service.security.AuthContext;
 import uz.consortgroup.support_service.validator.SupportTicketValidator;
 
 import java.util.UUID;

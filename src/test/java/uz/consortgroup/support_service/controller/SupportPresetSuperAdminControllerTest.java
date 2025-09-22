@@ -16,8 +16,6 @@ import uz.consortgroup.core.api.v1.dto.support.response.PresetResponse;
 import uz.consortgroup.core.api.v1.dto.user.enumeration.UserRole;
 import uz.consortgroup.support_service.exception.PresetNotFoundExecption;
 import uz.consortgroup.support_service.service.super_admin.SupportPresetSuperAdminService;
-import uz.consortgroup.support_service.util.AuthTokenFilter;
-import uz.consortgroup.support_service.util.JwtUtils;
 
 import java.util.List;
 import java.util.UUID;
