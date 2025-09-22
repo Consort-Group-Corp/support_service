@@ -25,8 +25,6 @@ import uz.consortgroup.support_service.handler.GlobalExceptionHandler;
 import uz.consortgroup.support_service.service.SupportIssuePresetService;
 import uz.consortgroup.support_service.service.SupportTicketService;
 import uz.consortgroup.support_service.service.super_admin.SupportTicketSuperAdminService;
-import uz.consortgroup.support_service.util.AuthTokenFilter;
-import uz.consortgroup.support_service.util.JwtUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -45,18 +43,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = SupportController.class)
-@AutoConfigureMockMvc(addFilters = false)
-@Import(GlobalExceptionHandler.class)
 class SupportControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
-    private JwtUtils jwtUtils;
-
-    @MockitoBean
-    private AuthTokenFilter authTokenFilter;
 
     @Autowired
     private ObjectMapper objectMapper;
